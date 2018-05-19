@@ -11,7 +11,10 @@ Install-Package Tapioca.HATEOAS -Version 1.0.0
 
 #### Import with nuget package manager
 
+![Nuget Package Mannager](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/master/images/nuget_package_mannager.png?raw=true?raw=true)
+
 >### 2 - Implements *ISupportsHyperMedia* in your exposed object.
+
 ```csharp
 namespace RESTFulSampleServer.Data.VO
 {
@@ -73,7 +76,9 @@ namespace RESTFulSampleServer.HyperMedia
     }
 }
 ```
+
 >### 4 - Add annotation *[TypeFilter(typeof(HyperMediaFilter))]* to your controller methods.
+
 ```csharp
 namespace RESTFulSampleServer.Controllers
 {
@@ -148,3 +153,11 @@ namespace RESTFulSampleServer.Controllers
 ```
 
 >### 6 - Enjoy
+
+#### Response as JSON
+
+![Response As JSON](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/master/images/response_in_json.png?raw=true)
+
+#### Response as XML
+
+![Response As XML](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/master/images/response_in_xml.png?raw=true)
