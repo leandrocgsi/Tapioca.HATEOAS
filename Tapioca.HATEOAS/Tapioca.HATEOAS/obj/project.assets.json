@@ -4192,7 +4192,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\U300057\\.nuget\\packages\\": {},
+    "C:\\Users\\LEANDRO\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -4201,17 +4201,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Dev\\Playground\\Code\\HATEOAS_Library\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\Tapioca.HATEOAS.csproj",
+      "projectUniqueName": "D:\\SandBox\\MyCode2\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\Tapioca.HATEOAS.csproj",
       "projectName": "Tapioca.HATEOAS",
-      "projectPath": "C:\\Dev\\Playground\\Code\\HATEOAS_Library\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\Tapioca.HATEOAS.csproj",
-      "packagesPath": "C:\\Users\\U300057\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\Playground\\Code\\HATEOAS_Library\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\obj\\",
+      "projectPath": "D:\\SandBox\\MyCode2\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\Tapioca.HATEOAS.csproj",
+      "packagesPath": "C:\\Users\\LEANDRO\\.nuget\\packages\\",
+      "outputPath": "D:\\SandBox\\MyCode2\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\Tapioca.HATEOAS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\U300057\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LEANDRO\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4242,7 +4242,7 @@
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0",
+            "version": "2.0.0",
             "autoReferenced": true
           }
         },

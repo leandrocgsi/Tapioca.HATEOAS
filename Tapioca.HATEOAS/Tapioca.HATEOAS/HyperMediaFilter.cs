@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,11 +24,8 @@ namespace Tapioca.HATEOAS
         {
             if (context.Result is OkObjectResult okObjectResult)
             {
-                //if (okObjectResult.Value is ISupportsHyperMedia model) {
-                    var enricher = _hyperMediaFilterOptions.ObjectContentResponseEnricherList.FirstOrDefault(x => x.CanEnrich(context));
-                    if (enricher != null)
-                        Task.FromResult(enricher.Enrich(context));
-                //}
+                var enricher = _hyperMediaFilterOptions.ObjectContentResponseEnricherList.FirstOrDefault(x => x.CanEnrich(context));
+                if (enricher != null) Task.FromResult(enricher.Enrich(context));
             }
         }
     }
