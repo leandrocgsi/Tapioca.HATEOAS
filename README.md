@@ -1,12 +1,17 @@
 # Tapioca.HATEOAS
 This is a simple library to implements HATEOAS docummentation in your RESTFul API's
 
--- Import with command line
+> ## How to use
+
+>### 1 - Import Tapioca.HATEOAS to your projetct
+#### Import with command line
 ```bash
 Install-Package Tapioca.HATEOAS -Version 1.0.0
 ```
 
-2 - Implements ISupportsHyperMedia in your exposed object.
+#### Import with nuget package manager
+
+>### 2 - Implements *ISupportsHyperMedia* in your exposed object.
 ```csharp
 namespace RESTFulSampleServer.Data.VO
 {
@@ -23,7 +28,8 @@ namespace RESTFulSampleServer.Data.VO
 }
 ```
 
-3 - Implements ISupportsHyperMedia in your exposed object.
+>### 3 - Implements your enricher with *ObjectContentResponseEnricher<T>*.
+
 ```csharp
 namespace RESTFulSampleServer.HyperMedia
 {
@@ -67,7 +73,7 @@ namespace RESTFulSampleServer.HyperMedia
     }
 }
 ```
-4 - Implements ISupportsHyperMedia in your exposed object.
+>### 4 - Add annotation *[TypeFilter(typeof(HyperMediaFilter))]* to your controller methods.
 ```csharp
 namespace RESTFulSampleServer.Controllers
 {
@@ -131,10 +137,14 @@ namespace RESTFulSampleServer.Controllers
     }
 }
 ```
-4 - Implements ISupportsHyperMedia in your exposed object.
+
+>### 5 - Add *HyperMediaFilterOptions* to your startup.
+
 ```csharp
     var filtertOptions = new HyperMediaFilterOptions();
     filtertOptions.ObjectContentResponseEnricherList.Add(new BookEnricher());
     filtertOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
     services.AddSingleton(filtertOptions);
 ```
+
+>### 6 - Enjoy
