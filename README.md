@@ -1,5 +1,5 @@
 # Tapioca.HATEOAS
-This is a simple library to implements HATEOAS docummentation in your RESTFul API's
+This is a smart library to implements HATEOAS pattern in your RESTFul API's
 
 > ## How to use
 
@@ -161,3 +161,5 @@ namespace RESTFulSampleServer.Controllers
 #### Response as XML
 
 ![Response As XML](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/master/images/response_in_xml.png?raw=true)
+
+>### Suggestions are welcome
