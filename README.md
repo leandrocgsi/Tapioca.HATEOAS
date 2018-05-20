@@ -1,5 +1,5 @@
 # Tapioca.HATEOAS
-This is a smart library to implements HATEOAS pattern in your RESTFul API's.
+This is a smart library to implements HATEOAS pattern in your RESTFul API's, implemented based in [this project](https://github.com/SotirisH/HyperMedia).
 
 > ## How to use
 
