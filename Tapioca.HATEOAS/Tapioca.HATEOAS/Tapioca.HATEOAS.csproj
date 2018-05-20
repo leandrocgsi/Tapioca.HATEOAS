@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.3</Version>
+    <PackageIconUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/master/images/logos/blue_link.jpeg?raw=true</PackageIconUrl>
+    <RepositoryUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/</RepositoryUrl>
+    <Description>This is a smart library to implements HATEOAS docummentation in your RESTFul API's</Description>
+    <Copyright>Copyright © Erudio C.P. 2018</Copyright>
+    <PackageProjectUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/</PackageProjectUrl>
+    <PackageTags>HATEOAS</PackageTags>
+    <PackageReleaseNotes>This is a smart library to implements HATEOAS docummentation in your RESTFul API's</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
