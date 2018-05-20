@@ -152,7 +152,17 @@ namespace RESTFulSampleServer.Controllers
     services.AddSingleton(filtertOptions);
 ```
 
->### 6 - Enjoy
+>### 6 - Add a *MapRoute* to your route like was defined in your enricher.
+
+```csharp
+    app.UseMvc(routes =>
+    {
+        routes.MapRoute(
+            name: "DefaultApi",
+            template: "{controller=Values}/{id?}");
+    });
+```
+>### 7 - Enjoy
 
 #### Response as JSON
 
