@@ -31,7 +31,7 @@
         public const string last = "last";
     }
 
-    public sealed class RensponseTypeFormat
+    public sealed class ResponseTypeFormat
     {
         public const string DefaultGet = "application/json";
         public const string DefaultPost = "application/x-www-form-urlencoded";
@@ -77,7 +77,7 @@
 
         /// <summary>
         /// The format of any data (Types) that should be provided in the HTTP request or that can be returned in the response, depending on the type of the request.
-        /// Types can be provided by the  RensponseTypeFormat helper class
+        /// Types can be provided by the  ResponseTypeFormat helper class
         /// </summary>
         public string Type { get; set; }
 
