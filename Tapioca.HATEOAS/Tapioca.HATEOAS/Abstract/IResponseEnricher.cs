@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System.Threading.Tasks;
 
-namespace Tapioca.HATEOAS
+namespace Tapioca.HATEOAS.Abstract
 {
     /// <summary>
     /// Interface for any class that wants to enrich a response

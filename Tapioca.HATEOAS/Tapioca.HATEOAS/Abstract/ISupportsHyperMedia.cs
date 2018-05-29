@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tapioca.HATEOAS
+namespace Tapioca.HATEOAS.Abstract
 {
     /// <summary>
     /// Interface for models that support Hypermedia
