@@ -6,7 +6,7 @@ This is a smart library to implements HATEOAS pattern in your RESTFul API's, imp
 >### 1 - Import Tapioca.HATEOAS to your projetct
 #### Import with command line
 ```bash
-Install-Package Tapioca.HATEOAS -Version 1.0.0
+Install-Package Tapioca.HATEOAS -Version 1.0.4
 ```
 
 #### Import with nuget package manager
