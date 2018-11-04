@@ -172,4 +172,4 @@ namespace RESTFulSampleServer.Controllers
 
 ![Response As XML](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/master/images/response_in_xml.png?raw=true)
 
->### Suggestions are welcome
+>### Suggestions are welcome. Feel free to sugest improvments.
