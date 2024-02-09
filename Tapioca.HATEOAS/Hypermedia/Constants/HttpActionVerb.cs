@@ -1,4 +1,4 @@
-﻿namespace Tapioca.HATEOAS.Constants
+﻿namespace Tapioca.HATEOAS.Hypermedia.Constants
 {
     public sealed class HttpActionVerb
     {

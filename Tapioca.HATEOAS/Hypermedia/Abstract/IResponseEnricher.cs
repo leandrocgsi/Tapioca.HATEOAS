@@ -1,16 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using System.Threading.Tasks;
 
-namespace Tapioca.HATEOAS.Abstract
+namespace Tapioca.HATEOAS.Hypermedia.Abstract
 {
-    /// <summary>
-    /// Interface for any class that wants to enrich a response
-    /// </summary>
     public interface IResponseEnricher
     {
-
         bool CanEnrich(ResultExecutingContext context);
-
         Task Enrich(ResultExecutingContext context);
     }
 }
