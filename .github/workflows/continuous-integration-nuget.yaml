@@ -28,9 +28,12 @@ jobs:
 
         # Increment version in your project file (e.g., .csproj)
         # Replace the placeholder with your actual project file name
-        PROJECT_FILE=Tapioca.HATEOAS.csproj
+        PROJECT_FILE=Tapioca.HATEOAS..csproj
         CURRENT_VERSION=$(grep -oP '<Version>\K[^<]+' $PROJECT_FILE)
         NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{$NF+=1; OFS="."; print $0}')
+
+        # Replace spaces with dots
+        NEW_VERSION=$(echo $NEW_VERSION | tr ' ' '.')
 
         # Update the version in the project file
         sed -i "s|<Version>$CURRENT_VERSION</Version>|<Version>$NEW_VERSION</Version>|" $PROJECT_FILE
@@ -39,9 +42,6 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "Increment version to $NEW_VERSION" -a
-
-        # Generate Release
-        dotnet build -c release
       
     - name: Generate Release
       run: dotnet build -c release
