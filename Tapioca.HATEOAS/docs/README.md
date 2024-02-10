@@ -40,7 +40,7 @@ namespace RESTFulSampleServer.Data.VO
 }
 ```
 
->### 3 - Implements your enricher with *ObjectContentResponseEnricher<T>*.
+>### 3 - Implements your enricher with *ContentResponseEnricher<T>*.
 
 ```csharp
 namespace RESTFulSampleServer.HyperMedia.Enricher
