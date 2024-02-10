@@ -41,7 +41,8 @@ jobs:
         # Commit the version change
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m "Increment version to $NEW_VERSION" -a
+        git commit -m "Increment version to $NEW_VERSION"  -a
+        git push
       
     - name: Generate Release
       run: dotnet build -c release
