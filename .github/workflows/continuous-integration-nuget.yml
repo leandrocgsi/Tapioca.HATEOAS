@@ -29,7 +29,7 @@ jobs:
       run: dotnet build -c release
       
     - name: Generate Package
-      run: dotnet pack -c release -o ./dist/Tapioca.HATEOAS.1.0.7.${{github.run_id}}.nupkg
+      run: dotnet pack -c release -o ./dist/Tapioca.HATEOAS.1.0.7.${{ github.run_id }}.nupkg
       
     - name: Publish Package
-      run: dotnet nuget push "./dist/Tapioca.HATEOAS.1.0.7.${{github.run_id}}.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push "./dist/Tapioca.HATEOAS.1.0.7.${{ github.run_id }}.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s "https://api.nuget.org/v3/index.json"
