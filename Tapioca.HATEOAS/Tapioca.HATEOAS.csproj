@@ -6,21 +6,18 @@
 		<Nullable>enable</Nullable>
 		<NoWarn>8618</NoWarn>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.10</Version>
+		<Version>1.0.11</Version>
 		<RepositoryUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/</RepositoryUrl>
 		<Description>This is a smart library to implements HATEOAS docummentation in your RESTFul API's</Description>
 		<Copyright>Copyright © Erudio Training - Consultoria e Treinamentos em TI LTDA 2024</Copyright>
 		<PackageProjectUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/</PackageProjectUrl>
+		<!-- PackageIcon>blue_link_128x128.png</PackageIcon> -->
 		<PackageTags>HATEOAS</PackageTags>
 		<PackageReleaseNotes>This is a smart library to implements HATEOAS docummentation in your RESTFul API's</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="https:\github.com\leandrocgsi\Tapioca.HATEOAS\blob\master\images\logos\blue_link.jpeg%3fraw=true" />
 	</ItemGroup>
 
 </Project>
