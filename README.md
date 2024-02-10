@@ -14,7 +14,7 @@ Install-Package Tapioca.HATEOAS -Version 1.0.15
 
 #### Import with nuget package manager
 
-![Nuget Package Mannager](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/main/images/nuget_package_mannager.png?raw=true?raw=true)
+![Nuget Package Mannager](nuget_package_mannager.png)
 
 >### 2 - Implements *ISupportsHyperMedia* in your exposed object.
 
