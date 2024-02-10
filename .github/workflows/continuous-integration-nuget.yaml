@@ -28,7 +28,7 @@ jobs:
 
         # Increment version in your project file (e.g., .csproj)
         # Replace the placeholder with your actual project file name
-        PROJECT_FILE=Tapioca.HATEOAS..csproj
+        PROJECT_FILE=Tapioca.HATEOAS.csproj
         CURRENT_VERSION=$(grep -oP '<Version>\K[^<]+' $PROJECT_FILE)
         NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{$NF+=1; OFS="."; print $0}')
 
