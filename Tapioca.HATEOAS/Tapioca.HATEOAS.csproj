@@ -12,6 +12,7 @@
 		<Copyright>Copyright © Erudio Training - Consultoria e Treinamentos em TI LTDA 2024</Copyright>
 		<PackageProjectUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/</PackageProjectUrl>
 		<!-- PackageIcon>blue_link_128x128.png</PackageIcon> -->
+		<PackageIcon>blue_link_128x128.png</PackageIcon>
 		<PackageTags>HATEOAS</PackageTags>
 		<PackageReleaseNotes>This is a smart library to implements HATEOAS docummentation in your RESTFul API's</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -19,6 +20,7 @@
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<None Include="icons\blue_link_128x128.png" Pack="true" PackagePath="\"/>
 		<None Include="docs\README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
