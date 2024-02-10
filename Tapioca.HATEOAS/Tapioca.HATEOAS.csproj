@@ -11,7 +11,6 @@
 		<Description>This is a smart library to implements HATEOAS docummentation in your RESTFul API's</Description>
 		<Copyright>Copyright © Erudio Training - Consultoria e Treinamentos em TI LTDA 2024</Copyright>
 		<PackageProjectUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/</PackageProjectUrl>
-		<!-- PackageIcon>blue_link_128x128.png</PackageIcon> -->
 		<PackageIcon>blue_link_128x128.png</PackageIcon>
 		<PackageTags>HATEOAS</PackageTags>
 		<PackageReleaseNotes>This is a smart library to implements HATEOAS docummentation in your RESTFul API's</PackageReleaseNotes>

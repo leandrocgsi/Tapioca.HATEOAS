@@ -1,19 +1,20 @@
 # Tapioca.HATEOAS
-This is a smart library to implements HATEOAS pattern in your RESTFul API's, implemented based in [this project](https://github.com/SotirisH/HyperMedia).
 
 [![.NET 8 Continuous Integration with GitHub, GitHub Actions and Nuget Packages](https://github.com/leandrocgsi/Tapioca.HATEOAS/actions/workflows/continuous-integration-nuget.yaml/badge.svg)](https://github.com/leandrocgsi/Tapioca.HATEOAS/actions/workflows/continuous-integration-nuget.yaml)
+
+This is a smart library to implements HATEOAS pattern in your RESTFul API's, implemented based in [this project](https://github.com/SotirisH/HyperMedia).
 
 > ## How to use
 
 >### 1 - Import Tapioca.HATEOAS to your projetct
 #### Import with command line
 ```bash
-Install-Package Tapioca.HATEOAS -Version 1.0.4
+Install-Package Tapioca.HATEOAS -Version 1.0.15
 ```
 
 #### Import with nuget package manager
 
-![Nuget Package Mannager](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/main/images/nuget_package_mannager.png?raw=true)
+![Nuget Package Mannager](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/main/images/nuget_package_mannager.png?raw=true?raw=true)
 
 >### 2 - Implements *ISupportsHyperMedia* in your exposed object.
 
@@ -36,44 +37,53 @@ namespace RESTFulSampleServer.Data.VO
 >### 3 - Implements your enricher with *ObjectContentResponseEnricher<T>*.
 
 ```csharp
-namespace RESTFulSampleServer.HyperMedia
+namespace RESTFulSampleServer.HyperMedia.Enricher
 {
-    public class BookEnricher : ObjectContentResponseEnricher<BookVO>
+    public class BookEnricher : ContentResponseEnricher<BookVO>
     {
         protected override Task EnrichModel(BookVO content, IUrlHelper urlHelper)
         {
-            var path = "api/books/v1";
-            var url = new { controller = path, id = content.Id };
+            var path = "api/book";
+            string link = GetLink(content.Id, urlHelper, path);
 
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.GET,
-                Href = urlHelper.Link("DefaultApi", url),
+                Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultGet
             });
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.POST,
-                Href = urlHelper.Link("DefaultApi", url),
+                Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultPost
             });
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.PUT,
-                Href = urlHelper.Link("DefaultApi", url),
+                Href = link,
                 Rel = RelationType.self,
-                Type = ResponseTypeFormat.DefaultPost
+                Type = ResponseTypeFormat.DefaultPut
             });
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.DELETE,
-                Href = urlHelper.Link("DefaultApi", url),
+                Href = link,
                 Rel = RelationType.self,
                 Type = "int"
             });
-            return null;
+            return Task.CompletedTask;
+        }
+
+        private string GetLink(long id, IUrlHelper urlHelper, string path)
+        {
+            lock (this)
+            {
+                var url = new { controller = path, id };
+                return new StringBuilder(urlHelper.Link("DefaultApi", url)).Replace("%2F", "/").ToString();
+            };
         }
     }
 }
@@ -84,94 +94,254 @@ namespace RESTFulSampleServer.HyperMedia
 ```csharp
 namespace RESTFulSampleServer.Controllers
 {
+
     [ApiVersion("1")]
+    [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
-    public class BooksController : Controller
+    public class BookController : ControllerBase
     {
+
+        private readonly ILogger<BookController> _logger;
+
         private IBookBusiness _bookBusiness;
 
-        public BooksController(IBookBusiness bookBusiness)
+        public BookController(ILogger<BookController> logger, IBookBusiness bookBusiness)
         {
+            _logger = logger;
             _bookBusiness = bookBusiness;
         }
 
         [HttpGet]
-        //Add HyperMediaFilter
+        [ProducesResponseType((200), Type = typeof(List<BookVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+		
+		// Adds HyperMedia filter
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
-            return new OkObjectResult(_bookBusiness.FindAll());
+            return Ok(_bookBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
-        //Add HyperMediaFilter
+        [ProducesResponseType((200), Type = typeof(BookVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+		
+		// Adds HyperMedia filter
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
-            var book = _bookBusiness.FindById(id);
+            var book = _bookBusiness.FindByID(id);
             if (book == null) return NotFound();
-            return new OkObjectResult(book);
+            return Ok(book);
         }
 
         [HttpPost]
-        //Add HyperMediaFilter
+        [ProducesResponseType((200), Type = typeof(BookVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+		
+		// Adds HyperMedia filter
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Post([FromBody]BookVO book)
+        public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
-            return new OkObjectResult(_bookBusiness.Create(book));
+            return Ok(_bookBusiness.Create(book));
         }
 
         [HttpPut]
-        //Add HyperMediaFilter
+        [ProducesResponseType((200), Type = typeof(BookVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+		
+		// Adds HyperMedia filter
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Put([FromBody]BookVO book)
+        public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
-            var updatedBook = _bookBusiness.Update(book);
-            if (updatedBook == null) return BadRequest();
-            return new OkObjectResult(updatedBook);
+            return Ok(_bookBusiness.Update(book));
         }
 
         [HttpDelete("{id}")]
-        //Add HyperMediaFilter
-        [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Delete(int id)
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        public IActionResult Delete(long id)
         {
             _bookBusiness.Delete(id);
             return NoContent();
         }
     }
 }
+
 ```
 
->### 5 - Add *HyperMediaFilterOptions* to your startup.
+>### 5 - Add *HyperMediaFilterOptions* to your Program.cs.
 
 ```csharp
-    var filtertOptions = new HyperMediaFilterOptions();
-    filtertOptions.ObjectContentResponseEnricherList.Add(new BookEnricher());
-    filtertOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
-    services.AddSingleton(filtertOptions);
+	var filterOptions = new HyperMediaFilterOptions();
+	filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+	filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
 ```
 
->### 6 - Add a *MapRoute* to your route like was defined in your enricher.
+>### 6 - Add a *MapControllerRoute* to your route like was defined in your enricher.
 
 ```csharp
-    app.UseMvc(routes =>
-    {
-        routes.MapRoute(
-            name: "DefaultApi",
-            template: "{controller=Values}/{id?}");
-    });
+	app.MapControllers();
+	* app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}"); *
+
+	app.Run();
 ```
 >### 7 - Enjoy
 
 #### Response as JSON
 
-![Response As JSON](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/main/images/response_in_json.png?raw=true)
+```json
+[
+    {
+        "id": 1,
+        "title": "Working effectively with legacy code",
+        "author": "Michael C. Feathers",
+        "price": 49.00,
+        "launchDate": "2017-11-29T13:50:05.878",
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/1",
+                "type": "application/json",
+                "action": "GET"
+            },
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/1",
+                "type": "application/json",
+                "action": "POST"
+            },
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/1",
+                "type": "application/json",
+                "action": "PUT"
+            },
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/1",
+                "type": "int",
+                "action": "DELETE"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Design Patterns",
+        "author": "Ralph Johnson, Erich Gamma, John Vlissides e Richard Helm",
+        "price": 45.00,
+        "launchDate": "2017-11-29T15:15:13.636",
+        "links": [
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/2",
+                "type": "application/json",
+                "action": "GET"
+            },
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/2",
+                "type": "application/json",
+                "action": "POST"
+            },
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/2",
+                "type": "application/json",
+                "action": "PUT"
+            },
+            {
+                "rel": "self",
+                "href": "https://localhost:44300/api/book/v1/2",
+                "type": "int",
+                "action": "DELETE"
+            }
+        ]
+    }
+]
+```
 
 #### Response as XML
 
-![Response As XML](https://github.com/leandrocgsi/Tapioca.HATEOAS/blob/main/images/response_in_xml.png?raw=true)
+```xml
+<ArrayOfBookVO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BookVO>
+        <Id>1</Id>
+        <Title>Working effectively with legacy code</Title>
+        <Author>Michael C. Feathers</Author>
+        <Price>49.00</Price>
+        <LaunchDate>2017-11-29T13:50:05.878</LaunchDate>
+        <Links>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/1</Href>
+                <Type>application/json</Type>
+                <Action>GET</Action>
+            </HyperMediaLink>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/1</Href>
+                <Type>application/json</Type>
+                <Action>POST</Action>
+            </HyperMediaLink>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/1</Href>
+                <Type>application/json</Type>
+                <Action>PUT</Action>
+            </HyperMediaLink>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/1</Href>
+                <Type>int</Type>
+                <Action>DELETE</Action>
+            </HyperMediaLink>
+        </Links>
+    </BookVO>
+    <BookVO>
+        <Id>2</Id>
+        <Title>Design Patterns</Title>
+        <Author>Ralph Johnson, Erich Gamma, John Vlissides e Richard Helm</Author>
+        <Price>45.00</Price>
+        <LaunchDate>2017-11-29T15:15:13.636</LaunchDate>
+        <Links>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/2</Href>
+                <Type>application/json</Type>
+                <Action>GET</Action>
+            </HyperMediaLink>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/2</Href>
+                <Type>application/json</Type>
+                <Action>POST</Action>
+            </HyperMediaLink>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/2</Href>
+                <Type>application/json</Type>
+                <Action>PUT</Action>
+            </HyperMediaLink>
+            <HyperMediaLink>
+                <Rel>self</Rel>
+                <Href>https://localhost:44300/api/book/v1/2</Href>
+                <Type>int</Type>
+                <Action>DELETE</Action>
+            </HyperMediaLink>
+        </Links>
+    </BookVO>
+</ArrayOfBookVO>
+```
 
->### Suggestions are welcome. Feel free to sugest improvments.
+>### Suggestions are welcome. Feel free to sugest improvements.
