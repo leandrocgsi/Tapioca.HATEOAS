@@ -32,5 +32,5 @@ jobs:
       run: dotnet pack -c release -o ./dist/
       
     - name: Publish Package
-      run: dotnet nuget push "./bin/Debug/*" -k ${{ secrets.NUGET_API_KEY }} -s "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push "./bin/Debug/Tapioca.HATEOAS.1.0.6.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s "https://api.nuget.org/v3/index.json"
 
