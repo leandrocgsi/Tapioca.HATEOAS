@@ -1,5 +1,6 @@
 # Tapioca.HATEOAS
 
+[![NuGet](https://img.shields.io/nuget/v/Tapioca.HATEOAS.svg)](https://www.nuget.org/packages/Tapioca.HATEOAS)
 [![.NET 8 Continuous Integration with GitHub, GitHub Actions and Nuget Packages](https://github.com/leandrocgsi/Tapioca.HATEOAS/actions/workflows/continuous-integration-nuget.yaml/badge.svg)](https://github.com/leandrocgsi/Tapioca.HATEOAS/actions/workflows/continuous-integration-nuget.yaml)
 
 This is a smart library to implements HATEOAS pattern in your RESTFul API's, implemented based in [this project](https://github.com/SotirisH/HyperMedia).
