@@ -8,6 +8,8 @@
 ![Stars](https://img.shields.io/github/stars/leandrocgsi/Tapioca.HATEOAS)
 [![.NET 8 Continuous Integration with GitHub, GitHub Actions and Nuget Packages](https://github.com/leandrocgsi/Tapioca.HATEOAS/actions/workflows/continuous-integration-nuget.yaml/badge.svg)](https://github.com/leandrocgsi/Tapioca.HATEOAS/actions/workflows/continuous-integration-nuget.yaml)
 
+This project will no longer be maintained, [use the Erudio.HATEOAS](https://www.nuget.org/packages/Erudio.HATEOAS/) package as a replacement!
+
 This is a smart library to implements HATEOAS pattern in your RESTFul API's, implemented based in [this project](https://github.com/SotirisH/HyperMedia).
 
 > ## How to use
@@ -17,10 +19,6 @@ This is a smart library to implements HATEOAS pattern in your RESTFul API's, imp
 ```bash
 Install-Package Tapioca.HATEOAS -Version 1.0.15
 ```
-
-#### Import with nuget package manager
-
-![Nuget Package Mannager](nuget_package_mannager.png)
 
 >### 2 - Implements *ISupportsHyperMedia* in your exposed object.
 
