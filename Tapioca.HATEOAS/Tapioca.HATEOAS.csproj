@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<NoWarn>8618</NoWarn>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>8.0.101.2</Version>
+		<Version>8.0.101.3</Version>
 		<RepositoryUrl>https://github.com/leandrocgsi/Tapioca.HATEOAS/</RepositoryUrl>
 		<Description>This is a smart library to implement HATEOAS documentation in your RESTFul API's</Description>
 		<Copyright>Copyright © Erudio Training - Consultoria e Treinamentos em TI LTDA 2024</Copyright>
